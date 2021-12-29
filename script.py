@@ -1,6 +1,6 @@
 #pip install pyautogui
 #pip install pynput
-#pip isntall selenium
+#pip install selenium
 
 import pyautogui
 import math
@@ -30,6 +30,7 @@ pyautogui.click(button = 'left')
 time.sleep(1)
 
 mouse = Controller()
+#uncomment to write to coordinates.txt
 #fileWrite = open('coordinates.txt', 'w')
 
 for i in range(370):
