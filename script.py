@@ -1,12 +1,14 @@
 #pip install pyautogui
 #pip install pynput
 #pip install selenium
+#pip install Pillow
 
 import pyautogui
 import math
 import time
 from pynput.mouse import Button, Controller
 from selenium import webdriver
+from PIL import ImageGrab
 
 options = webdriver.ChromeOptions()
 options.add_experimental_option('excludeSwitches', ['enable-logging'])
@@ -16,33 +18,21 @@ driver.maximize_window()
 
 time.sleep(2)
 
-r = 427
-x = 960
-y = 587
-
 fileOpen = open('coordinates.txt', 'r')
 coords = fileOpen.readlines()
-coords = [line.strip('\n') for line in coords]
 
-pyautogui.moveTo(x, y)
+x, y = pyautogui.size()
+
+pyautogui.moveTo(x/2, y/2)
 pyautogui.click(button = 'left')
 
 time.sleep(1)
 
 mouse = Controller()
-#uncomment to write to coordinates.txt
-#fileWrite = open('coordinates.txt', 'w')
 
-for i in range(370):
-    #fileWrite.write(str(x+r*math.sin(math.radians(i))) + ' ' + str(y+r*math.cos(math.radians(i))+'\n'))
+for i in range(len(coords)):
     coord = coords[i].split()
-    if i%6 == 0:
-        if i >= 120 and i <= 270:
-            pyautogui.moveTo(float(coord[0])+1, float(coord[1])+2)
-        elif i>= 270:
-            pyautogui.moveTo(float(coord[0])-1, float(coord[1])-1)
-        else:
-            pyautogui.moveTo(float(coord[0])+0.5, float(coord[1]))
+    pyautogui.moveTo(float(coord[0]), float(coord[1]))
     if i == 0:
         mouse.press(Button.left)
 
